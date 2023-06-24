@@ -1,29 +1,33 @@
+//переменные для попапа
 const jokePopup = document.getElementById('popup');
 const jokeBtn = document.getElementById('joke');
-const body = document.getElementById('body');
-
-let unlock = true;
-
-const timeout = 800;
-
-jokeBtn.addEventListener ('click', event => {
-/*     const currentPopup = jokePopup; */
-    popupOpen(jokePopup);
-    /* event.preventDefault(); */
-})
 const popupClose = document.querySelector('.popup__close');
-popupClose.addEventListener('click', event => {
-    event.preventDefault();
-    popupCloseFunc();
-})
-function popupOpen(jokePopup) {
-    jokePopup.classList.add('open');
-    jokePopup.addEventListener('click', e => {
-        if (!e.target.closest('popup__content')) {
-            popupCloseFunc();
-        }
-    });
+const jokeText = document.querySelector('.joke__text');
+//функция для появления и закрытия попапа
+function popupFunc () {
+    jokeBtn.addEventListener('click', event => {        
+        event.preventDefault();
+        jokeApiReq ();
+        jokePopup.classList.add('open');
+        
+    })
+    popupClose.addEventListener('click', event => {
+        event.preventDefault();
+        jokePopup.classList.remove('open');
+    })
 }
-function popupCloseFunc(jokePopup) {
-    jokePopup.classList.remove('open');
+popupFunc();
+
+//функция запроса шутки с апи
+async function jokeApiReq () {
+    try {
+        const apiKey = '39355f2c938446e9a0ac53c6bfcb3782';
+        let response = await fetch(`https://api.spoonacular.com/food/jokes/random?apiKey=${apiKey}`);
+        console.log(response);
+        let joke = await response.json();
+        jokeText.textContent = joke.text;
+    }
+    catch (error) {
+        jokeText.textContent = "Server is not responding";
+    }
 }
