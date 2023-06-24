@@ -1,5 +1,4 @@
 .popup {
-/*     display: none; */
     position: fixed;
     z-index: 1;
     left: 0;
@@ -43,4 +42,18 @@
     position: absolute;
     right: 10px;
     top: 10px;
+}
+.popup__title {
+    text-align: center;
+    font-family: 'Diphylleia', serif;
+    font-size: larger;
+    font-weight: bolder;
+}
+.popup__text {
+    text-align: center;
+    font-family: 'Diphylleia', serif;
+}
+.popup__img {
+    margin-left: 35%;
+    max-width: 35%;
 }

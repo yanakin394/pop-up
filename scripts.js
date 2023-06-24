@@ -2,7 +2,7 @@
 const jokePopup = document.getElementById('popup');
 const jokeBtn = document.getElementById('joke');
 const popupClose = document.querySelector('.popup__close');
-const jokeText = document.querySelector('.joke__text');
+const jokeText = document.querySelector('.popup__text');
 //функция для появления и закрытия попапа
 function popupFunc () {
     jokeBtn.addEventListener('click', event => {        
@@ -28,6 +28,6 @@ async function jokeApiReq () {
         jokeText.textContent = joke.text;
     }
     catch (error) {
-        jokeText.textContent = "Server is not responding";
+        jokeText.textContent = `Server is not responding: ${error.message}`;
     }
 }
